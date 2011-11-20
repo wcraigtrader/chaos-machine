@@ -50,10 +50,7 @@ module echo_all_measurements() {
 	echo( verbose_measurement( "Jack size", JACK_SIZE ) );
 }
 
-echo_all_measurements();
-
-// ----- Chaos Toy Parts ------------------------------------------------------
-
+// echo_all_measurements();
 
 // ----- Ball -----------------------------------------------------------------
 
@@ -75,6 +72,8 @@ module tube( length ) {
 //tube( TUBE_SMALL );
 //translate( [25,0,0] ) tube( TUBE_MEDIUM );
 //translate( [50,0,0] ) tube( TUBE_LONG );
+
+// ----- Jacks ----------------------------------------------------------------
 
 module jack_spar() {
 	x = JACK_SIZE / 2;
@@ -101,4 +100,5 @@ module jack() {
 	}
 }
 
-jack();
+// jack_spar();
+// jack();
