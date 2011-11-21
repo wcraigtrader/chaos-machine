@@ -25,6 +25,18 @@ TUBE_SMALL = 15 * cm;
 TUBE_MEDIUM = TUBE_SMALL + JACK_BASE + TUBE_SMALL;
 TUBE_LONG = TUBE_MEDIUM + JACK_BASE + TUBE_SMALL;
 
+CONNECTOR_LENGTH = 39 * rch;
+
+TRACK_RAIL_WIDTH = 25 * rch;
+TRACK_RAIL_HEIGHT = 34 * rch;
+TRACK_RAIL_SPACING = 96 * rch;
+TRACK_BASE_HEIGHT = 26 * rch;
+TRACK_BASE_WIDTH = 49 * rch;
+TRACK_BASE_ID = 22 * rch;
+
+TRACK_SHORT_LENGTH = 4.5 * inch;
+TRACK_LONG_LENGTH = 2 * TRACK_SHORT_LENGTH;
+
 // ----- Measurement Checks ---------------------------------------------------
 
 function inches( d ) =
@@ -69,10 +81,6 @@ module tube( length ) {
 	}
 }
 
-//tube( TUBE_SMALL );
-//translate( [25,0,0] ) tube( TUBE_MEDIUM );
-//translate( [50,0,0] ) tube( TUBE_LONG );
-
 // ----- Jacks ----------------------------------------------------------------
 
 module jack_spar() {
@@ -100,5 +108,17 @@ module jack() {
 	}
 }
 
-// jack_spar();
-// jack();
+// ----- Straight Track -------------------------------------------------------
+
+module track_base( length ) {
+	offset = -1 * mm;
+	difference() {
+		cube( [ length, TRACK_BASE_WIDTH, TRACK_BASE_HEIGHT ], true );
+		translate( [0, 0, offset ] ) rotate( [ 0, 90, 0 ] ) 
+			cylinder( h=length+2*mm, r=TRACK_BASE_ID/2, center=true, $fn=45 );
+		translate( [0, 0, -TRACK_BASE_ID/2+offset ] ) 
+			cube( [ length+2*mm, TRACK_BASE_ID, TRACK_BASE_ID ], center=true );
+	}
+}
+
+track_base( TRACK_SHORT_LENGTH );
